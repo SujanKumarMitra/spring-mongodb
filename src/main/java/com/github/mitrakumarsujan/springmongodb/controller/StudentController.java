@@ -70,7 +70,7 @@ public class StudentController {
     }
 
     @PutMapping("/{roll}")
-    public ResponseEntity<Map<String,Object>> updateStudent(
+    public ResponseEntity<Map<String, Object>> updateStudent(
             @PathVariable("roll") Long roll,
             @RequestBody SimpleStudent student
     ) {

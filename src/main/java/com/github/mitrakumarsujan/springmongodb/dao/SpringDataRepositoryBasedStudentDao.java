@@ -48,7 +48,7 @@ public class SpringDataRepositoryBasedStudentDao implements StudentDao {
                 .findFirstByRoll(updatedStudent.getRoll())
                 .orElseGet(() -> null);
 
-        if(student == null)
+        if (student == null)
             return false;
 
         student.setName(updatedStudent.getName());
