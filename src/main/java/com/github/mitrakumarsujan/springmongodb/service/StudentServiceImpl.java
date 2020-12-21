@@ -19,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Autowired
-    public StudentServiceImpl(@Qualifier("mongoTemplateBasedStudentDao") StudentDao studentDao) {
+    public StudentServiceImpl(@Qualifier("mongoDbPojoCodecBasedStudentDao") StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
