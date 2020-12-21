@@ -1,5 +1,6 @@
 package com.github.mitrakumarsujan.springmongodb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class SpringDataMongoDbAnnotatedStudent implements Student {
 
     @MongoId
+    @JsonIgnore
     private ObjectId objectId;
 
     @Field("roll")

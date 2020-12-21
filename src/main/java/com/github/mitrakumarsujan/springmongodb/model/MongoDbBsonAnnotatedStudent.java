@@ -1,11 +1,17 @@
 package com.github.mitrakumarsujan.springmongodb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
 import java.util.Objects;
 
 public class MongoDbBsonAnnotatedStudent implements Student {
 
+    @BsonId
+    @JsonIgnore
+    private ObjectId objectId;
     @BsonProperty("roll")
     private Long roll;
     @BsonProperty("name")
@@ -23,6 +29,10 @@ public class MongoDbBsonAnnotatedStudent implements Student {
         this.name = name;
     }
 
+    public ObjectId getObjectId() {
+        return objectId;
+    }
+
     @Override
     public Long getRoll() {
         return roll;
@@ -31,6 +41,10 @@ public class MongoDbBsonAnnotatedStudent implements Student {
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setObjectId(ObjectId objectId) {
+        this.objectId = objectId;
     }
 
     @Override
@@ -47,13 +61,15 @@ public class MongoDbBsonAnnotatedStudent implements Student {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MongoDbBsonAnnotatedStudent that = (MongoDbBsonAnnotatedStudent) o;
-        return Objects.equals(roll, that.roll) && Objects.equals(name, that.name);
+        MongoDbBsonAnnotatedStudent student = (MongoDbBsonAnnotatedStudent) o;
+        return Objects.equals(objectId, student.objectId)
+                && Objects.equals(roll, student.roll)
+                && Objects.equals(name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roll, name);
+        return Objects.hash(objectId, roll, name);
     }
 
     @Override
