@@ -1,4 +1,4 @@
-package com.github.mitrakumarsujan.springmongodb;
+package com.github.mitrakumarsujan.springmongodb.controller;
 
 import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
@@ -10,13 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.text.MessageFormat.format;
 import static org.springframework.http.HttpStatus.*;
-import static org.springframework.http.HttpStatus.CONFLICT;
 
 @RestController
 @RequestMapping("/students")
@@ -29,11 +29,27 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getStudents(
+            @RequestParam(name = "page", defaultValue = "0") Integer pageNo,
+            @RequestParam(name = "size", defaultValue = "10") Integer size) {
+
+        List<Student> students = studentService.getStudents(pageNo, size);
+
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("success", true);
+        response.put("page", pageNo);
+        response.put("size", students.size());
+        response.put("students", students);
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/{roll}")
     public ResponseEntity<Map<String, Object>> getStudent(@PathVariable("roll") Long roll) {
         Student student = studentService.getStudent(roll);
 
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put("success", true);
         response.put("student", student);
 
@@ -44,7 +60,7 @@ public class StudentController {
     public ResponseEntity<Map<String, Object>> createStudent(@RequestBody SimpleStudent student) {
         Student createdStudent = studentService.createStudent(student);
 
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put("success", true);
         response.put("message", "Student created successfully");
         response.put("student", createdStudent);
@@ -55,12 +71,12 @@ public class StudentController {
     }
 
     @DeleteMapping("/{roll}")
-    public ResponseEntity<Map<String,Object>> deleteStudent(@PathVariable Long roll) {
+    public ResponseEntity<Map<String, Object>> deleteStudent(@PathVariable Long roll) {
         studentService.deleteStudent(roll);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("success",true);
-        response.put("message", format("Student with roll=[{0}] is deleted",roll));
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("success", true);
+        response.put("message", format("Student with roll=[{0}] is deleted", roll));
 
         return ResponseEntity.ok(response);
     }
@@ -82,7 +98,7 @@ public class StudentController {
     }
 
     private Map<String, Object> buildResponse(HttpStatus status, String message) {
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
 
         response.put("error", status);
         response.put("message", message);

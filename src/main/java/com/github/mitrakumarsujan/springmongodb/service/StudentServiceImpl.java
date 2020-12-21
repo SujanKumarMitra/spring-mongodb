@@ -1,19 +1,20 @@
 package com.github.mitrakumarsujan.springmongodb.service;
 
-import com.github.mitrakumarsujan.springmongodb.model.Student;
 import com.github.mitrakumarsujan.springmongodb.dao.StudentDao;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
+import com.github.mitrakumarsujan.springmongodb.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
+import java.util.List;
 
 import static java.text.MessageFormat.format;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
+    public static final Integer PAGE_SIZE = 10;
     private StudentDao studentDao;
 
     @Autowired
@@ -28,6 +29,11 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentAlreadyExistsException(format("Student already exists with roll=[{0}]", student.getRoll()));
         }
         return student;
+    }
+
+    @Override
+    public List<Student> getStudents(Integer page, Integer limit) {
+        return studentDao.getStudents(PAGE_SIZE * page, limit);
     }
 
     @Override

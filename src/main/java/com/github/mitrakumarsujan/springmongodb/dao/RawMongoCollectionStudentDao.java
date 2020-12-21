@@ -3,21 +3,23 @@ package com.github.mitrakumarsujan.springmongodb.dao;
 import com.github.mitrakumarsujan.springmongodb.model.SimpleStudent;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
 import com.mongodb.MongoWriteException;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
+import org.bson.BsonDocument;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.StreamSupport;
+
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
+import static java.util.stream.Collectors.toList;
 
 @Repository
 public class RawMongoCollectionStudentDao implements StudentDao {
@@ -41,6 +43,27 @@ public class RawMongoCollectionStudentDao implements StudentDao {
             return Boolean.valueOf(false);
         }
 
+    }
+
+    @Override
+    public List<Student> getStudents(Integer skip, Integer limit) {
+
+        Spliterator<Document> studentDocuments = studentsCollection
+                .find(new BsonDocument())
+                .skip(skip)
+                .limit(limit)
+                .spliterator();
+
+        return StreamSupport
+                .stream(studentDocuments, false)
+                .map(this::buildStudent)
+                .collect(toList());
+    }
+
+    private Student buildStudent(Document document) {
+        Long roll = document.getLong("roll");
+        String name = document.getString("name");
+        return new SimpleStudent(roll, name);
     }
 
     @Override
