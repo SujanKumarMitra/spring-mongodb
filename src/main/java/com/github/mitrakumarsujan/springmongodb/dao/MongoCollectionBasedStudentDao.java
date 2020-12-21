@@ -22,12 +22,12 @@ import static com.mongodb.client.model.Updates.set;
 import static java.util.stream.Collectors.toList;
 
 @Repository
-public class RawMongoCollectionStudentDao implements StudentDao {
+public class MongoCollectionBasedStudentDao implements StudentDao {
 
     private MongoCollection<Document> studentsCollection;
 
     @Autowired
-    public RawMongoCollectionStudentDao(MongoDatabase database) {
+    public MongoCollectionBasedStudentDao(MongoDatabase database) {
         this.studentsCollection = database.getCollection("students");
     }
 

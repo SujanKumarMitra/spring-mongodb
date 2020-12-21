@@ -30,7 +30,7 @@ public class MongoDbPojoCodecBasedStudentDao implements StudentDao {
 
     @Autowired
     public MongoDbPojoCodecBasedStudentDao(
-            @Qualifier("rawMongoCollectionStudentDao") StudentDao delegatee,
+            @Qualifier("mongoCollectionBasedStudentDao") StudentDao delegatee,
             MongoDatabase database) {
         this.delegatee = delegatee;
         CodecRegistry pojoCodecRegistry = fromProviders(builder().automatic(true).build());
