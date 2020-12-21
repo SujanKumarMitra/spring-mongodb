@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +67,20 @@ public class StudentController {
         return ResponseEntity
                 .status(CREATED)
                 .body(response);
+    }
+
+    @PutMapping("/{roll}")
+    public ResponseEntity<Map<String,Object>> updateStudent(
+            @PathVariable("roll") Long roll,
+            @RequestBody SimpleStudent student
+    ) {
+        student.setRoll(roll);
+        Student updatedStudent = studentService.updateStudent(student);
+
+        Map<String, Object> response = buildResponse(OK,
+                format("student with roll[{0}] updated", roll));
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{roll}")
