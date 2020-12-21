@@ -7,6 +7,9 @@ public class SimpleStudent implements Student {
     private Long roll;
     private String name;
 
+    public SimpleStudent() {
+    }
+
     public SimpleStudent(Long roll, String name) {
         this.roll = roll;
         this.name = name;
