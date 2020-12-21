@@ -1,0 +1,58 @@
+package com.github.mitrakumarsujan.springmongodb.service;
+
+import com.github.mitrakumarsujan.springmongodb.model.Student;
+import com.github.mitrakumarsujan.springmongodb.dao.StudentDao;
+import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
+import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.MessageFormat;
+
+import static java.text.MessageFormat.format;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+
+    private StudentDao studentDao;
+
+    @Autowired
+    public StudentServiceImpl(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
+    @Override
+    public Student createStudent(Student student) throws StudentAlreadyExistsException {
+        Boolean created = studentDao.createStudent(student);
+        if (!created) {
+            throw new StudentAlreadyExistsException(format("Student already exists with roll=[{0}]", student.getRoll()));
+        }
+        return student;
+    }
+
+    @Override
+    public Student getStudent(Long roll) throws StudentNotFoundException {
+        Student student = studentDao.getStudent(roll);
+        if (student == null)
+            throw new StudentNotFoundException(format("No student found with roll=[{0}]", roll));
+        return student;
+    }
+
+    @Override
+    public Student updateStudent(Student student) throws StudentNotFoundException {
+        Boolean updated = studentDao.updateStudent(student);
+        if (!updated) {
+            throw new StudentNotFoundException(format("No student found with roll =[{0}]", student.getRoll()));
+        }
+        return student;
+
+    }
+
+    @Override
+    public void deleteStudent(Long roll) throws StudentNotFoundException {
+        Boolean deleted = studentDao.deleteStudent(roll);
+        if (!deleted) {
+            throw new StudentNotFoundException(format("No student found with roll=[{0}]", roll));
+        }
+    }
+}
