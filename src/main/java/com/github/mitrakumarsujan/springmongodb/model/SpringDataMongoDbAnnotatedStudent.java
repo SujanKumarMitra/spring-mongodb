@@ -1,13 +1,21 @@
 package com.github.mitrakumarsujan.springmongodb.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document("students")
 public class SpringDataMongoDbAnnotatedStudent implements Student {
 
+    @MongoId
+    private ObjectId objectId;
+
     @Field("roll")
+    @Indexed
     private Long roll;
+
     @Field("name")
     private String name;
 
@@ -23,6 +31,13 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
         this(student.getRoll(), student.getName());
     }
 
+    public ObjectId getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(ObjectId objectId) {
+        this.objectId = objectId;
+    }
 
     @Override
     public Long getRoll() {
@@ -46,9 +61,11 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
 
     @Override
     public String toString() {
-        return "SpringDataAnnotatedStudent{" +
-                "roll=" + roll +
+        return "SpringDataMongoDbAnnotatedStudent{" +
+                "objectId=" + objectId +
+                ", roll=" + roll +
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

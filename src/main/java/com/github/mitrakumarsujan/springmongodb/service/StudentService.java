@@ -1,8 +1,8 @@
 package com.github.mitrakumarsujan.springmongodb.service;
 
-import com.github.mitrakumarsujan.springmongodb.model.Student;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
+import com.github.mitrakumarsujan.springmongodb.model.Student;
 
 import java.util.List;
 
