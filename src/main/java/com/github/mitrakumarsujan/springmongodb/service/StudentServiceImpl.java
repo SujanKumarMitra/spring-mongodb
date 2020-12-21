@@ -5,6 +5,7 @@ import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsEx
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Autowired
-    public StudentServiceImpl(StudentDao studentDao) {
+    public StudentServiceImpl(@Qualifier("mongoTemplateBasedStudentDao") StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
