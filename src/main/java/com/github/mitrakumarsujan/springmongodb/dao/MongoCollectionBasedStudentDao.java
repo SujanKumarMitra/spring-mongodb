@@ -1,5 +1,6 @@
 package com.github.mitrakumarsujan.springmongodb.dao;
 
+import com.github.mitrakumarsujan.springmongodb.configuration.MongoDbIndexConfigurer;
 import com.github.mitrakumarsujan.springmongodb.model.SimpleStudent;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
 import com.mongodb.MongoWriteException;
@@ -13,6 +14,7 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;

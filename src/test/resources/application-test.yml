@@ -3,7 +3,7 @@ spring:
     mongodb:
       host: "localhost"
       port: 27017
-      database: "spring_mongodb"
+      database: "spring_mongodb_test"
 
 app:
   mongodb:
