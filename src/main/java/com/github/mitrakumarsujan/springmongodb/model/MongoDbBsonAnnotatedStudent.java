@@ -74,7 +74,7 @@ public class MongoDbBsonAnnotatedStudent implements Student {
 
     @Override
     public String toString() {
-        return "SimpleStudent{" +
+        return "Student{" +
                 "roll=" + roll +
                 ", name='" + name + '\'' +
                 '}';

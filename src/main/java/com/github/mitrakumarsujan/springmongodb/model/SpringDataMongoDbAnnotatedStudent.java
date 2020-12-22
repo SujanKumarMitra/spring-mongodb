@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.Objects;
+
 @Document("students")
 public class SpringDataMongoDbAnnotatedStudent implements Student {
 
@@ -62,10 +64,22 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SpringDataMongoDbAnnotatedStudent student = (SpringDataMongoDbAnnotatedStudent) o;
+        return Objects.equals(id, student.id) && Objects.equals(roll, student.roll) && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roll, name);
+    }
+
+    @Override
     public String toString() {
-        return "SpringDataMongoDbAnnotatedStudent{" +
-                "objectId=" + id +
-                ", roll=" + roll +
+        return "Student{" +
+                "roll=" + roll +
                 ", name='" + name + '\'' +
                 '}';
     }
