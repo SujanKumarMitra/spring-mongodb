@@ -2,14 +2,16 @@ package com.github.mitrakumarsujan.springmongodb.controller;
 
 import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
-import com.github.mitrakumarsujan.springmongodb.model.SimpleStudent;
+import com.github.mitrakumarsujan.springmongodb.model.CreateStudentRequest;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
+import com.github.mitrakumarsujan.springmongodb.model.UpdateStudentRequest;
 import com.github.mitrakumarsujan.springmongodb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +32,15 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getStudents(
-            @RequestParam(name = "skip", defaultValue = "0") Integer pageNo,
-            @RequestParam(name = "limit", defaultValue = "10") Integer size) {
+            @RequestParam(name = "skip", defaultValue = "0") Integer skip,
+            @RequestParam(name = "limit", defaultValue = "10") Integer limit) {
 
-        List<Student> students = studentService.getStudents(pageNo, size);
+        List<Student> students = studentService.getStudents(skip, limit);
 
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("success", true);
-        response.put("page", pageNo);
-        response.put("size", students.size());
+        response.put("skipped", skip);
+        response.put("limit", students.size());
         response.put("students", students);
 
         return ResponseEntity.ok(response);
@@ -56,7 +58,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createStudent(@RequestBody SimpleStudent student) {
+    public ResponseEntity<Map<String, Object>> createStudent(
+            @RequestBody @Valid CreateStudentRequest student) {
         Student createdStudent = studentService.createStudent(student);
 
         Map<String, Object> response = new LinkedHashMap<>();
@@ -72,8 +75,7 @@ public class StudentController {
     @PutMapping("/{roll}")
     public ResponseEntity<Map<String, Object>> updateStudent(
             @PathVariable("roll") Long roll,
-            @RequestBody SimpleStudent student
-    ) {
+            @RequestBody @Valid UpdateStudentRequest student) {
         student.setRoll(roll);
         Student updatedStudent = studentService.updateStudent(student);
 

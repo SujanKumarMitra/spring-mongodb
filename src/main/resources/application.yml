@@ -3,4 +3,4 @@ spring:
     name: "spring-mongodb"
   profiles:
     active:
-      - "test"
+      - "dev"
