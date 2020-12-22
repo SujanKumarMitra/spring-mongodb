@@ -38,9 +38,9 @@ public class StudentImpl implements Student {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StudentImpl student = (StudentImpl) o;
-        return Objects.equals(roll, student.roll) && Objects.equals(name, student.name);
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return Objects.equals(roll, student.getRoll()) && Objects.equals(name, student.getName());
     }
 
     @Override

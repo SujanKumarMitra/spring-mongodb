@@ -28,11 +28,11 @@ abstract class StudentDaoTest {
 
     protected List<Student> getStudentsToInsert() {
         return Arrays.asList(
-                new SimpleStudent(1L, "Tom"),
-                new SimpleStudent(2L, "Jerry"),
-                new SimpleStudent(3L, "Spike"),
-                new SimpleStudent(4L, "Nibbles"),
-                new SimpleStudent(5L, "Tyke")
+                new StudentImpl(1L, "Tom"),
+                new StudentImpl(2L, "Jerry"),
+                new StudentImpl(3L, "Spike"),
+                new StudentImpl(4L, "Nibbles"),
+                new StudentImpl(5L, "Tyke")
         );
     }
 
