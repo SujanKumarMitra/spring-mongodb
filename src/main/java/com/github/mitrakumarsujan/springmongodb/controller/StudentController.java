@@ -30,8 +30,8 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getStudents(
-            @RequestParam(name = "page", defaultValue = "0") Integer pageNo,
-            @RequestParam(name = "size", defaultValue = "10") Integer size) {
+            @RequestParam(name = "skip", defaultValue = "0") Integer pageNo,
+            @RequestParam(name = "limit", defaultValue = "10") Integer size) {
 
         List<Student> students = studentService.getStudents(pageNo, size);
 

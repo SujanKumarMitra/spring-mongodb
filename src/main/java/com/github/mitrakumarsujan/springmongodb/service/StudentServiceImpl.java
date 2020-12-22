@@ -1,11 +1,11 @@
 package com.github.mitrakumarsujan.springmongodb.service;
 
+import com.github.mitrakumarsujan.springmongodb.dao.SpringDataRepositoryBasedStudentDao;
 import com.github.mitrakumarsujan.springmongodb.dao.StudentDao;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentAlreadyExistsException;
 import com.github.mitrakumarsujan.springmongodb.exception.StudentNotFoundException;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +15,10 @@ import static java.text.MessageFormat.format;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    public static final Integer PAGE_SIZE = 10;
     private StudentDao studentDao;
 
     @Autowired
-    public StudentServiceImpl(@Qualifier("springDataRepositoryBasedStudentDao") StudentDao studentDao) {
+    public StudentServiceImpl(SpringDataRepositoryBasedStudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
@@ -33,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getStudents(Integer page, Integer limit) {
-        return studentDao.getStudents(PAGE_SIZE * page, limit);
+    public List<Student> getStudents(Integer skip, Integer limit) {
+        return studentDao.getStudents(skip, limit);
     }
 
     @Override

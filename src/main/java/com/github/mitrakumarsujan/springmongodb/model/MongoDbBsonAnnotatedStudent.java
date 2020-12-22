@@ -11,7 +11,7 @@ public class MongoDbBsonAnnotatedStudent implements Student {
 
     @BsonId
     @JsonIgnore
-    private ObjectId objectId;
+    private ObjectId id;
     @BsonProperty("roll")
     private Long roll;
     @BsonProperty("name")
@@ -29,8 +29,8 @@ public class MongoDbBsonAnnotatedStudent implements Student {
         this.name = name;
     }
 
-    public ObjectId getObjectId() {
-        return objectId;
+    public ObjectId getId() {
+        return id;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class MongoDbBsonAnnotatedStudent implements Student {
         return name;
     }
 
-    public void setObjectId(ObjectId objectId) {
-        this.objectId = objectId;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     @Override
@@ -62,14 +62,14 @@ public class MongoDbBsonAnnotatedStudent implements Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MongoDbBsonAnnotatedStudent student = (MongoDbBsonAnnotatedStudent) o;
-        return Objects.equals(objectId, student.objectId)
+        return Objects.equals(id, student.id)
                 && Objects.equals(roll, student.roll)
                 && Objects.equals(name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(objectId, roll, name);
+        return Objects.hash(id, roll, name);
     }
 
     @Override

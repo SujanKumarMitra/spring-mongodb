@@ -12,7 +12,7 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
 
     @MongoId
     @JsonIgnore
-    private ObjectId objectId;
+    private ObjectId id;
 
     @Field("roll")
     @Indexed
@@ -33,12 +33,12 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
         this(student.getRoll(), student.getName());
     }
 
-    public ObjectId getObjectId() {
-        return objectId;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setObjectId(ObjectId objectId) {
-        this.objectId = objectId;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class SpringDataMongoDbAnnotatedStudent implements Student {
     @Override
     public String toString() {
         return "SpringDataMongoDbAnnotatedStudent{" +
-                "objectId=" + objectId +
+                "objectId=" + id +
                 ", roll=" + roll +
                 ", name='" + name + '\'' +
                 '}';

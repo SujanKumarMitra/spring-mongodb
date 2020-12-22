@@ -14,7 +14,7 @@ public interface StudentService {
         return getStudents(0, limit);
     }
 
-    List<Student> getStudents(Integer page, Integer limit);
+    List<Student> getStudents(Integer skip, Integer limit);
 
     Student getStudent(Long roll) throws StudentNotFoundException;
 

@@ -8,7 +8,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class MongoDbPojoCodecBasedStudentDao implements StudentDao {
 
     @Autowired
     public MongoDbPojoCodecBasedStudentDao(
-            @Qualifier("mongoCollectionBasedStudentDao") StudentDao delegatee,
+            MongoCollectionBasedStudentDao delegatee,
             MongoDatabase database) {
         this.delegatee = delegatee;
         CodecRegistry pojoCodecRegistry = fromProviders(builder().automatic(true).build());
