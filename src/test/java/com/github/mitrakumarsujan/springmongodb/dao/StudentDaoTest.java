@@ -1,6 +1,5 @@
 package com.github.mitrakumarsujan.springmongodb.dao;
 
-import com.github.mitrakumarsujan.springmongodb.model.SimpleStudent;
 import com.github.mitrakumarsujan.springmongodb.model.Student;
 import com.github.mitrakumarsujan.springmongodb.model.StudentImpl;
 import org.junit.jupiter.api.AfterEach;
@@ -46,7 +45,7 @@ abstract class StudentDaoTest {
                 .allMatch(Boolean::booleanValue); //all students should get inserted
 
         if (!allInserted) {
-            fail("Dummy Student Data not inserted.. check createStudent()");
+            fail("Dummy Student Data not inserted. check createStudent()");
         }
 
     }
