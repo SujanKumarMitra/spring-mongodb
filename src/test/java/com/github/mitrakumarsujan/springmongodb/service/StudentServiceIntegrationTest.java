@@ -17,13 +17,13 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-abstract class StudentServiceTest {
+abstract class StudentServiceIntegrationTest {
 
     public static final long ROLL_NOT_PRESENT_IN_DB = 10L;
     protected StudentService studentService;
     protected List<Student> insertedStudents;
 
-    protected StudentServiceTest(StudentService studentService) {
+    protected StudentServiceIntegrationTest(StudentService studentService) {
         this.studentService = studentService;
     }
 

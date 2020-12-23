@@ -14,13 +14,13 @@ import java.util.Objects;
 import static java.text.MessageFormat.format;
 import static org.junit.jupiter.api.Assertions.*;
 
-abstract class StudentDaoTest {
+abstract class StudentDaoIntegrationTest {
 
     protected static final long ROLL_NOT_PRESENT_IN_DB = 999L;
     protected StudentDao dao;
     protected List<Student> insertedStudents;
 
-    protected StudentDaoTest(StudentDao dao) {
+    protected StudentDaoIntegrationTest(StudentDao dao) {
         Objects.requireNonNull(dao);
         this.dao = dao;
     }

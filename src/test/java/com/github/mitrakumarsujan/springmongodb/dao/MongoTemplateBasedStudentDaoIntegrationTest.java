@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MongoDbPojoCodecBasedStudentDaoTest extends StudentDaoTest {
+class MongoTemplateBasedStudentDaoIntegrationTest extends StudentDaoIntegrationTest {
 
     @Autowired
-    public MongoDbPojoCodecBasedStudentDaoTest(MongoDbPojoCodecBasedStudentDao studentDao) {
+    public MongoTemplateBasedStudentDaoIntegrationTest(MongoTemplateBasedStudentDao studentDao) {
         super(studentDao);
     }
 }
